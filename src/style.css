@@ -20,7 +20,7 @@
 :root[data-theme="light"] {
   --color: black;
   --bg: white;
-  --fg: #929292;
+  --fg: #777777;
 
   --border: black;
 }
@@ -208,7 +208,7 @@ nav a {
 .section-socials a,
 .section-contact a {
   opacity: 1;
-  color: var(--);
+  color: var(--color);
 }
 
 .section-socials p:hover,
