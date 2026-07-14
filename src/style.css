@@ -6,14 +6,20 @@
 :root:not([data-theme]) {
   --font-main: 'JetBrains Mono', monospace;
   
+  --color: white;
   --bg: black;
   --fg: #242424;
+
+  --border: #b8b8b8;
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
+    --color: black;
     --bg: white;
-    --fg: black;
+    --fg: #777777;
+
+    --border: black;
   }
 }
 
