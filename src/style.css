@@ -1,48 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@100..800&display=swap');
 :root {
-  --font-main: 'JetBrains Mono', monospace;
-}
-
-:root:not([data-theme]) {
-  --font-main: 'JetBrains Mono', monospace;
-  
+  --font-main: 'Martian Mono', monospace;
   --color: white;
   --bg: black;
-  --fg: #242424;
-
-  --border: #b8b8b8;
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme]) {
-    --color: black;
-    --bg: white;
-    --fg: #777777;
-
-    --border: black;
-  }
-}
-
-:root[data-theme="light"] {
-  --color: black;
-  --bg: white;
-  --fg: #777777;
-
-  --border: black;
-}
-
-:root[data-theme="dark"] {
-  --color: white;
-  --bg: black;
-  --fg: #242424;
-
+  --fg: #2424248e;
   --border: #b8b8b8;
 }
 
 body{
-  background-color: var(--bg);
-  color: var(--fg);
+  background-image: url(public/bg.png);
   padding-inline: 4px;
+  padding: 0rem 1.5rem 0rem 1.5rem
   
 }
 
@@ -52,8 +20,6 @@ h1, h2, div, p {
 }
 
 main {
-  color: var(--fg);
-  background-color: var(--bg);
   font-family: var(--font-main);
 }
 
@@ -63,8 +29,8 @@ section {
   gap: 3px;
 
   margin-block: 15px;
-  color: var(--bg);
   background-color: var(--fg);
+
 }
 
 section h1,
