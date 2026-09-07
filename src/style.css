@@ -8,9 +8,11 @@
 }
 
 body{
-  background-image: url(public/bg.png);
+  background-image: url(./assets/bg.png);
+  background-position: center;
+  background-size:contain;
   padding-inline: 4px;
-  padding: 0rem 1.5rem 0rem 1.5rem
+  padding: 0rem 1.5rem 0rem 1.5rem;
   
 }
 
