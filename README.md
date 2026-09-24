@@ -1,14 +1,15 @@
-# fraa™
+# fraa™ portfolio
 
-Minimal personal.
-
-The idea behind this project is simple: a clean minimal black and white portfolio with a monospace font, light/dark theme support.
+A personal portfolio for Francesco, styled around a light editorial layout, bold geometric headings, and a monospaced interface font.
 
 ## Tech Stack
 
-* HTML
+* Svelte 5
 * TypeScript
+* Vite
 * CSS
+
+Basement Grotesque is bundled under its SIL Open Font License in `public/fonts`; Inconsolata and Fragment Mono provide the monospaced text. Glow UI outline icons are stored in `public/icons` with their MIT license.
 
 ## Development
 
