@@ -9,7 +9,7 @@ A personal portfolio for Francesco, styled around a light editorial layout, bold
 * Vite
 * CSS
 
-The reference uses Basement Grotesque for headings; Space Grotesk is used here as a close substitute because the original font's embedding terms were not available. Inconsolata and Fragment Mono provide the monospaced text. Glow UI outline icons are stored in `public/icons`; their MIT license is included alongside the files.
+Basement Grotesque is bundled under its SIL Open Font License in `public/fonts`; Inconsolata and Fragment Mono provide the monospaced text. Glow UI outline icons are stored in `public/icons` with their MIT license.
 
 ## Development
 

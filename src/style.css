@@ -13,9 +13,17 @@
   --soft: #f0f0f1;
   --line: #d7d7da;
   --lime: #d9ed73;
-  --heading: 'Space Grotesk', 'Arial', sans-serif;
+  --heading: 'Basement Grotesque', 'Arial', sans-serif;
   --mono: 'Inconsolata', 'Courier New', monospace;
   --label: 'Fragment Mono', 'Inconsolata', monospace;
+}
+
+@font-face {
+  font-family: 'Basement Grotesque';
+  src: url('/fonts/BasementGrotesque-Black_v1.202.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
 }
 
 *,
@@ -285,7 +293,7 @@ h2,
 h3 {
   color: var(--ink);
   font-family: var(--heading);
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .hero h1 {
@@ -519,7 +527,7 @@ h3 {
 .project-cover__name {
   font-family: var(--heading);
   font-size: clamp(24px, 3vw, 36px);
-  font-weight: 700;
+  font-weight: 900;
   letter-spacing: -0.075em;
   line-height: 1.05;
 }
