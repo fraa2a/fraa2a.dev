@@ -1,6 +1,6 @@
 # fraa™ portfolio
 
-A personal portfolio for Francesco, styled around a light editorial layout, bold geometric headings, and a monospaced interface font.
+A personal portfolio for Francesco, with a restrained dark interface, subtle translucent surfaces, and a violet accent.
 
 ## Tech Stack
 
@@ -9,7 +9,7 @@ A personal portfolio for Francesco, styled around a light editorial layout, bold
 * Vite
 * CSS
 
-Basement Grotesque is bundled under its SIL Open Font License in `public/fonts`; Inconsolata and Fragment Mono provide the monospaced text. Glow UI outline icons are stored in `public/icons` with their MIT license.
+Space Grotesk provides the headings and Inconsolata the monospaced text through Google Fonts.
 
 ## Development
 

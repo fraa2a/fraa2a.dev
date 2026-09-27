@@ -1,223 +1,183 @@
 <script>
-  let menuOpen = $state(false)
+  import { onMount } from 'svelte'
+
+  let overcharged = $state(false)
+
+  function stopOvercharge() {
+    overcharged = false
+    document.documentElement.classList.remove('overcharged')
+  }
+
+  function startOvercharge() {
+    overcharged = true
+    document.documentElement.classList.add('overcharged')
+  }
 
   const projects = [
     {
-      number: '01',
       name: 'Legio Launcher',
-      type: 'DESKTOP LAUNCHER · IN DEVELOPMENT',
-      description:
-        'A game launcher built with Rust and Tauri, with a Linux-first focus.',
-      stack: ['Rust', 'Tauri', 'Svelte'],
+      description: 'A game launcher built with Linux as the first-class platform.',
       href: 'https://github.com/fraa2a/Legio',
-      mark: 'L',
-      tone: 'lime',
     },
     {
-      number: '02',
+      name: 'Word2a',
+      href: 'https://github.com/fraa2a/word2a',
+    },
+    {
       name: 'Monolith',
-      type: 'WINDOWS APP · RUST + TAURI',
-      description:
-        'A Windows clipping and recording app with a replay buffer and direct capture controls.',
-      stack: ['Rust', 'Tauri', 'FFmpeg'],
+      description: 'A Windows clipping and recording app with a replay buffer and direct capture controls.',
       href: 'https://github.com/fraa2a/Monolith',
-      mark: 'M',
-      tone: 'lavender',
-    },
-    {
-      number: '03',
-      name: 'Mango Launcher',
-      type: 'OPEN-SOURCE · GAME LAUNCHER',
-      description:
-        'A gaming platform for organizing and launching games, with emulation and big-picture support.',
-      stack: ['Desktop', 'Gaming', 'Open source'],
-      href: 'https://github.com/fraa2a/mango-launcher',
-      mark: 'M',
-      tone: 'blue',
-    },
-    {
-      number: '04',
-      name: 'Icarus Launcher',
-      type: 'DESKTOP APP · MODRINTH FORK',
-      description:
-        'A privacy-focused Modrinth app fork with telemetry and ads removed, plus offline account support.',
-      stack: ['Modrinth', 'Privacy', 'Offline accounts'],
-      href: 'https://github.com/fraa2a/Icarus-Launcher',
-      mark: 'I',
-      tone: 'peach',
     },
   ]
 
-  const skills = ['Rust', 'TypeScript', 'Svelte', 'Tauri', 'Linux', 'Self-hosting']
+  onMount(() => {
+    const secretCode = [
+      'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a',
+    ]
+    let position = 0
+    let revealObserver
 
-  function closeMenu() {
-    menuOpen = false
-  }
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      document.documentElement.classList.add('motion-ready')
+      revealObserver = new IntersectionObserver((entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        }
+      }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' })
+
+      document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element))
+    }
+
+    function handleKeydown(event) {
+      if (event.key === 'Escape' && overcharged) {
+        stopOvercharge()
+        return
+      }
+
+      if (event.key === secretCode[position]) {
+        position += 1
+      } else {
+        position = event.key === secretCode[0] ? 1 : 0
+      }
+
+      if (position === secretCode.length) {
+        position = 0
+        startOvercharge()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeydown)
+    return () => {
+      window.removeEventListener('keydown', handleKeydown)
+      revealObserver?.disconnect()
+      document.documentElement.classList.remove('motion-ready')
+      document.documentElement.classList.remove('overcharged')
+    }
+  })
 </script>
 
 <div class="page-shell" id="home">
   <header class="site-header">
-    <a class="wordmark" href="#home" onclick={closeMenu} aria-label="Francesco home">
-      fraa<span>™</span>
-    </a>
+    <a class="wordmark" href="#home" aria-label="Francesco home">fraa<span>™</span></a>
 
-    <span class="header-note">PERSONAL PORTFOLIO</span>
-
-    <div class="navigation">
-      <button
-        class:open={menuOpen}
-        class="menu-toggle"
-        type="button"
-        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-        aria-expanded={menuOpen}
-        aria-controls="site-menu"
-        onclick={() => (menuOpen = !menuOpen)}
-      >
-        <img src="/icons/menu-outline.svg" alt="" aria-hidden="true" />
-      </button>
-
-      {#if menuOpen}
-        <nav class="menu-panel" id="site-menu" aria-label="Main navigation">
-          <a href="#about" onclick={closeMenu}>about</a>
-          <a href="#work" onclick={closeMenu}>work</a>
-          <a href="#skills" onclick={closeMenu}>skills</a>
-          <a href="#contact" onclick={closeMenu}>contact</a>
-        </nav>
-      {/if}
-    </div>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </header>
 
   <main>
-    <section class="hero" id="about" aria-labelledby="hero-title">
-      <p class="eyebrow"><span>HI <span class="wave">👋</span></span> · STUDENT DEVELOPER · ITALY</p>
-
-      <div class="hero-main">
-        <div class="identity-card" aria-hidden="true">
-          <div class="identity-card__top">
-            <span>FRAA™</span>
-            <span class="identity-card__dot"></span>
-          </div>
-          <div class="identity-card__mark">
-            <img src="/logo.svg" alt="" />
-          </div>
-          <div class="identity-card__bottom">
-            <span>SOFTWARE</span>
-            <span>ITALY / 01</span>
-          </div>
-        </div>
-
-        <div class="hero-copy">
-          <p class="hero-name">I’M FRANCESCO, AND I’M A</p>
-          <h1 id="hero-title">SOFTWARE<br />DEVELOPER<span class="accent-cursor">_</span></h1>
-          <p class="hero-description">
-            I learn by building software and exploring Linux, self-hosting, and systems.
-          </p>
-          <div class="hero-actions">
-            <a class="button button--primary" href="#work">CHECK MY WORK</a>
-            <span class="action-separator">or</span>
-            <a class="button button--outline" href="mailto:fraa2a@proton.me">
-              GET IN TOUCH
-              <img src="/icons/mail-outline.svg" alt="" aria-hidden="true" />
-            </a>
-          </div>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy" data-reveal>
+        <h1 id="hero-title">Hi, I’m Francesco<span>.</span></h1>
+        <p class="hero-description">
+          I learn by building software and exploring Linux, self-hosting, and systems.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#work"><span>See my work</span><span aria-hidden="true">↘</span></a>
         </div>
       </div>
+    </section>
 
-      <div class="status-panel" aria-label="About Francesco">
-        <div class="status-item">
-          <span class="status-label"><span class="status-dot"></span> CURRENTLY BUILDING</span>
-          <span class="status-value">Legio Launcher</span>
-        </div>
-        <div class="status-item">
-          <span class="status-label"><img src="/icons/code-outline.svg" alt="" /> FOCUS</span>
-          <span class="status-value">Software · Linux</span>
-        </div>
-        <div class="status-item">
-          <span class="status-label"><img src="/icons/location-outline.svg" alt="" /> BASED IN</span>
-          <span class="status-value">Italy</span>
+    <section class="about-section" id="about" aria-labelledby="about-title" data-reveal>
+      <div class="about-layout">
+        <h2 id="about-title">about_me</h2>
+        <div class="about-copy">
+          <p>I’m a student developer based in Italy 🇮🇹. I learn by building software and exploring Linux, self-hosting, and systems.</p>
+          <p>Most of my work is desktop software, from a Linux-first game launcher to a Windows clipping and recording app.</p>
         </div>
       </div>
     </section>
 
     <section class="work-section" id="work" aria-labelledby="work-title">
-      <div class="section-heading">
-        <p class="eyebrow">A FEW THINGS I’VE MADE</p>
-        <h2 id="work-title">SELECTED<span>_</span>WORKS</h2>
+      <div class="section-heading" data-reveal>
+        <h2 id="work-title">selected_work</h2>
       </div>
 
-      <div class="work-list">
-        {#each projects as project (project.number)}
-          <article class="work-row">
-            <div class={`project-cover project-cover--${project.tone}`} aria-hidden="true">
-              <div class="project-cover__top">
-                <span class="project-cover__index">{project.number} / 04</span>
-                <span class="project-cover__symbol">{project.mark}</span>
-              </div>
-              <div class="project-cover__center">
-                <span class="project-cover__name">{project.name}</span>
-                <span class="project-cover__rule"></span>
-                <span class="project-cover__type">{project.type}</span>
-              </div>
-              <div class="project-cover__bottom">
-                <span>FRAA™</span>
-                <span class="project-cover__cross">+</span>
-                <span>PROJECT / {project.number}</span>
-              </div>
-            </div>
-
-            <div class="project-details">
-              <div class="project-heading-line">
-                <span class="project-number">{project.number}</span>
-                <h3>{project.name}</h3>
-              </div>
-              <p class="project-type">{project.type}</p>
-              <p class="project-description">{project.description}</p>
-              <ul class="tag-list" aria-label={`${project.name} technologies and topics`}>
-                {#each project.stack as item (item)}
-                  <li>{item}</li>
-                {/each}
-              </ul>
-              <a class="text-link" href={project.href} target="_blank" rel="noreferrer">
-                VIEW SOURCE
-                <img src="/icons/external-link-outline.svg" alt="" aria-hidden="true" />
-              </a>
-            </div>
-          </article>
+      <div class="project-grid">
+        {#each projects as project, index (project.name)}
+          <a
+            class="project-card"
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+            data-reveal
+            style={`--reveal-delay: ${index * 75}ms`}
+          >
+            <span class="project-heading">
+              <span class="project-name">{project.name}</span>
+            </span>
+            {#if project.description}
+              <span class="project-description">{project.description}</span>
+            {/if}
+            <span class="project-open">Open project <span class="project-open-arrow" aria-hidden="true">↗</span></span>
+          </a>
         {/each}
+      </div>
+
+      <div class="tool-section" aria-labelledby="tools-title">
+        <h3 class="tool-heading" id="tools-title" data-reveal>Tools I use</h3>
+        <ul class="tool-list">
+          <li><img class="tool-badge" alt="Rust" src="https://shieldcn.dev/badge/Rust.svg?logo=rust&amp;color=f97316" height="32" /></li>
+          <li><img class="tool-badge" alt="Python" src="https://shieldcn.dev/badge/Python.svg?logo=python&amp;color=0061ff" height="32" /></li>
+          <li><img class="tool-badge" alt="Svelte" src="https://shieldcn.dev/badge/Svelte.svg?logo=svelte&amp;color=ff4200" height="32" /></li>
+          <li><img class="tool-badge" alt="Git" src="https://shieldcn.dev/badge/Git.svg?logo=git" height="32" /></li>
+          <li><img class="tool-badge" alt="Arch Linux" src="https://shieldcn.dev/badge/Arch Linux.svg?logo=archlinux" height="32" /></li>
+        </ul>
       </div>
     </section>
 
-    <section class="skills-section" id="skills" aria-labelledby="skills-title">
-      <div class="section-heading">
-        <p class="eyebrow">TOOLS I WORK WITH</p>
-        <h2 id="skills-title">MY<span>_</span>SKILLS</h2>
-      </div>
-      <ul class="skills-list">
-        {#each skills as skill (skill)}
-          <li><img src="/icons/code-outline.svg" alt="" aria-hidden="true" /> {skill}</li>
-        {/each}
-      </ul>
-    </section>
-
-    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+    <section class="contact-section" id="contact" aria-labelledby="contact-title" data-reveal>
       <div>
-        <p class="eyebrow">CONTACT</p>
-        <h2 id="contact-title">LET’S TALK<span>_</span></h2>
+        <h2 id="contact-title">Have something in mind?</h2>
+        <p>Tell me about it.</p>
       </div>
-      <a class="button button--primary" href="mailto:fraa2a@proton.me">
-        EMAIL ME
-        <img src="/icons/mail-outline.svg" alt="" aria-hidden="true" />
+      <a class="contact-link" href="mailto:fraa2a@proton.me">
+        <span>fraa2a@proton.me</span><span aria-hidden="true">↗</span>
       </a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <a class="wordmark" href="#home">fraa<span>™</span></a>
-    <p>BUILT BY FRANCESCO</p>
+    <a class="wordmark" href="#home" aria-label="Back to top">fraa<span>™</span></a>
     <div class="footer-links">
-      <a href="https://github.com/fraa2a" target="_blank" rel="noreferrer">GITHUB</a>
-      <a href="https://ds.taxphobia.top" target="_blank" rel="noreferrer">DISCORD</a>
-      <a href="mailto:fraa2a@proton.me">EMAIL</a>
+      <a href="https://github.com/fraa2a" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://ds.taxphobia.top" target="_blank" rel="noreferrer">Discord</a>
     </div>
   </footer>
 </div>
+
+{#if overcharged}
+  <div class="overcharge-toast" role="status" aria-live="polite">
+    <div class="overcharge-copy">
+      <strong>OVERCHARGED</strong>
+      <span>Press Esc or close this notice to cool down.</span>
+    </div>
+    <button type="button" onclick={stopOvercharge} aria-label="Power down overcharged mode"><span>×</span></button>
+  </div>
+{/if}
