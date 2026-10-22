@@ -21,12 +21,13 @@
     },
     {
       name: 'Word2a',
+      description: 'A Wordle-inspired word game for the terminal, built with Rust and Ratatui.',
       href: 'https://github.com/fraa2a/word2a',
     },
     {
-      name: 'Monolith',
-      description: 'A Windows clipping and recording app with a replay buffer and direct capture controls.',
-      href: 'https://github.com/fraa2a/Monolith',
+      name: 'Icarus Launcher',
+      description: 'A privacy-focused Modrinth App fork with extra launcher features and customization.',
+      href: 'https://github.com/fraa2a/Icarus',
     },
   ]
 
@@ -94,6 +95,7 @@
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy" data-reveal>
+        <p class="hero-eyebrow"><span class="hero-status" aria-hidden="true"></span> Student developer / Based in Italy</p>
         <h1 id="hero-title">Hi, I’m Francesco<span>.</span></h1>
         <p class="hero-description">
           I learn by building software and exploring Linux, self-hosting, and systems.
@@ -106,17 +108,24 @@
 
     <section class="about-section" id="about" aria-labelledby="about-title" data-reveal>
       <div class="about-layout">
-        <h2 id="about-title">about_me</h2>
+        <div class="section-title-group">
+          <p class="section-kicker">01 / About</p>
+          <h2 id="about-title">about_me</h2>
+        </div>
         <div class="about-copy">
           <p>I’m a student developer based in Italy 🇮🇹. I learn by building software and exploring Linux, self-hosting, and systems.</p>
-          <p>Most of my work is desktop software, from a Linux-first game launcher to a Windows clipping and recording app.</p>
+          <p>My projects range from Linux-first launchers and a privacy-focused Modrinth fork to terminal games and web services.</p>
         </div>
       </div>
     </section>
 
     <section class="work-section" id="work" aria-labelledby="work-title">
       <div class="section-heading" data-reveal>
-        <h2 id="work-title">selected_work</h2>
+        <div class="section-title-group">
+          <p class="section-kicker">02 / Projects</p>
+          <h2 id="work-title">selected_work</h2>
+        </div>
+        <p class="section-summary">A selection of things I build and maintain.</p>
       </div>
 
       <div class="project-grid">
@@ -140,8 +149,8 @@
         {/each}
       </div>
 
-      <div class="tool-section" aria-labelledby="tools-title">
-        <h3 class="tool-heading" id="tools-title" data-reveal>Tools I use</h3>
+      <div class="tool-bar" aria-label="Tools I use" data-reveal>
+        <span class="tool-label">Tools I use <span aria-hidden="true">/</span></span>
         <ul class="tool-list">
           <li><img class="tool-badge" alt="Rust" src="https://shieldcn.dev/badge/Rust.svg?logo=rust&amp;color=f97316" height="32" /></li>
           <li><img class="tool-badge" alt="Python" src="https://shieldcn.dev/badge/Python.svg?logo=python&amp;color=0061ff" height="32" /></li>
@@ -149,6 +158,28 @@
           <li><img class="tool-badge" alt="Git" src="https://shieldcn.dev/badge/Git.svg?logo=git" height="32" /></li>
           <li><img class="tool-badge" alt="Arch Linux" src="https://shieldcn.dev/badge/Arch Linux.svg?logo=archlinux" height="32" /></li>
         </ul>
+      </div>
+    </section>
+
+    <section class="experience-section" id="experience" aria-labelledby="experience-title">
+      <div class="section-heading" data-reveal>
+        <div class="section-title-group">
+          <p class="section-kicker">03 / Collaboration</p>
+          <h2 id="experience-title">Where I work</h2>
+        </div>
+      </div>
+
+      <div class="experience-card" data-reveal>
+        <div class="experience-identity">
+          <span class="experience-icon" aria-hidden="true">
+            <img src="/icons/code-outline.svg" alt="" width="26" height="26" />
+          </span>
+          <div class="experience-name">
+            <strong>Taxphobia / Lodatori</strong>
+            <span>Software &amp; infrastructure</span>
+          </div>
+        </div>
+        <p>Building useful software and internal tools, Minecraft servers, Discord bots, web–Discord integrations, websites, and VPS infrastructure.</p>
       </div>
     </section>
 
