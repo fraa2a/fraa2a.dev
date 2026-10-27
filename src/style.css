@@ -156,6 +156,16 @@ button:focus-visible {
   margin-top: 18px;
 }
 
+/* contribution graph (third-party SVG, light theme inverted for the dark page) */
+.graph {
+  display: block;
+  width: 100%;
+  max-width: 663px;
+  height: auto;
+  margin-top: 40px;
+  filter: invert(1) hue-rotate(180deg);
+}
+
 /* sections */
 .block {
   padding: 28px 0 clamp(48px, 7vw, 72px);

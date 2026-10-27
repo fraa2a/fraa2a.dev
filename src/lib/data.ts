@@ -6,6 +6,7 @@ export const profile = {
   email: 'fraa2a@proton.me',
   github: 'https://github.com/fraa2a',
   discord: 'https://ds.taxphobia.top',
+  contributions: 'https://ghchart.rshah.org/4a5d3a/fraa2a',
   bio: [
     'I’m Francesco, a student developer based in Italy. I learn by building software and exploring Linux, self-hosting, and systems.',
     'Most of what I make is desktop and terminal software: launchers, small games and tools that I wanted to exist and couldn’t find.',

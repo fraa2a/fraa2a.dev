@@ -85,6 +85,14 @@
             <p>{paragraph}</p>
           {/each}
         </div>
+        <img
+          class="graph"
+          src={profile.contributions}
+          alt="GitHub contribution graph for {profile.handle}"
+          width="663"
+          height="104"
+          loading="lazy"
+        />
       </div>
     </section>
 
