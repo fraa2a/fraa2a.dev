@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import { profile, tools, projects } from './lib/data.ts'
 
   let overcharged = $state(false)
 
@@ -12,23 +13,6 @@
     overcharged = true
     document.documentElement.classList.add('overcharged')
   }
-
-  const projects = [
-    {
-      name: 'Legio Launcher',
-      description: 'A game launcher built with Linux as the first-class platform.',
-      href: 'https://github.com/fraa2a/Legio',
-    },
-    {
-      name: 'Word2a',
-      href: 'https://github.com/fraa2a/word2a',
-    },
-    {
-      name: 'Monolith',
-      description: 'A Windows clipping and recording app with a replay buffer and direct capture controls.',
-      href: 'https://github.com/fraa2a/Monolith',
-    },
-  ]
 
   onMount(() => {
     const secretCode = [
@@ -80,95 +64,59 @@
   })
 </script>
 
-<div class="page-shell" id="home">
-  <header class="site-header">
-    <a class="wordmark" href="#home" aria-label="Francesco home">fraa<span>™</span></a>
-
-    <nav class="site-nav" aria-label="Main navigation">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
+<div class="page" id="home">
   <main>
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero-copy" data-reveal>
-        <h1 id="hero-title">Hi, I’m Francesco<span>.</span></h1>
-        <p class="hero-description">
-          I learn by building software and exploring Linux, self-hosting, and systems.
-        </p>
-        <div class="hero-actions">
-          <a class="button button-primary" href="#work"><span>See my work</span><span aria-hidden="true">↘</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="about-section" id="about" aria-labelledby="about-title" data-reveal>
-      <div class="about-layout">
-        <h2 id="about-title">about_me</h2>
-        <div class="about-copy">
-          <p>I’m a student developer based in Italy 🇮🇹. I learn by building software and exploring Linux, self-hosting, and systems.</p>
-          <p>Most of my work is desktop software, from a Linux-first game launcher to a Windows clipping and recording app.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="work-section" id="work" aria-labelledby="work-title">
-      <div class="section-heading" data-reveal>
-        <h2 id="work-title">selected_work</h2>
-      </div>
-
-      <div class="project-grid">
-        {#each projects as project, index (project.name)}
-          <a
-            class="project-card"
-            href={project.href}
-            target="_blank"
-            rel="noreferrer"
-            data-reveal
-            style={`--reveal-delay: ${index * 75}ms`}
-          >
-            <span class="project-heading">
-              <span class="project-name">{project.name}</span>
-            </span>
-            {#if project.description}
-              <span class="project-description">{project.description}</span>
-            {/if}
-            <span class="project-open">Open project <span class="project-open-arrow" aria-hidden="true">↗</span></span>
-          </a>
-        {/each}
-      </div>
-
-      <div class="tool-section" aria-labelledby="tools-title">
-        <h3 class="tool-heading" id="tools-title" data-reveal>Tools I use</h3>
-        <ul class="tool-list">
-          <li><img class="tool-badge" alt="Rust" src="https://shieldcn.dev/badge/Rust.svg?logo=rust&amp;color=f97316" height="32" /></li>
-          <li><img class="tool-badge" alt="Python" src="https://shieldcn.dev/badge/Python.svg?logo=python&amp;color=0061ff" height="32" /></li>
-          <li><img class="tool-badge" alt="Svelte" src="https://shieldcn.dev/badge/Svelte.svg?logo=svelte&amp;color=ff4200" height="32" /></li>
-          <li><img class="tool-badge" alt="Git" src="https://shieldcn.dev/badge/Git.svg?logo=git" height="32" /></li>
-          <li><img class="tool-badge" alt="Arch Linux" src="https://shieldcn.dev/badge/Arch Linux.svg?logo=archlinux" height="32" /></li>
+    <section class="intro" aria-labelledby="name">
+      <aside class="side" data-reveal>
+        <img class="avatar" src="/avatar.jpg" alt="Portrait of {profile.name}" width="240" height="240" />
+        <ul class="info">
+          <li><span class="ico ico-code" aria-hidden="true"></span><a href={profile.github} target="_blank" rel="noreferrer">@{profile.handle}</a></li>
+          <li><span class="ico ico-location" aria-hidden="true"></span>{profile.location}</li>
+          <li><span class="ico ico-mail" aria-hidden="true"></span><a href="mailto:{profile.email}">{profile.email}</a></li>
+          <li><span class="ico ico-chat" aria-hidden="true">#</span><a href={profile.discord} target="_blank" rel="noreferrer">Discord</a></li>
         </ul>
+      </aside>
+
+      <div class="lead" data-reveal style="--reveal-delay: 80ms">
+        <p class="label">{profile.role}</p>
+        <h1 id="name">{profile.name}</h1>
+        <div class="bio">
+          {#each profile.bio as paragraph}
+            <p>{paragraph}</p>
+          {/each}
+        </div>
       </div>
     </section>
 
-    <section class="contact-section" id="contact" aria-labelledby="contact-title" data-reveal>
-      <div>
-        <h2 id="contact-title">Have something in mind?</h2>
-        <p>Tell me about it.</p>
-      </div>
-      <a class="contact-link" href="mailto:fraa2a@proton.me">
-        <span>fraa2a@proton.me</span><span aria-hidden="true">↗</span>
-      </a>
+    <section class="block" aria-labelledby="tools-title">
+      <h2 class="label" id="tools-title" data-reveal>Tools</h2>
+      <ul class="tools" data-reveal>
+        {#each tools as tool}
+          <li style={`--tool-color: ${tool.color}; --icon: url(/icons/tools/${tool.icon}.svg)`}>
+            <span class="tool-ico" aria-hidden="true"></span>{tool.name}
+          </li>
+        {/each}
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="projects-title">
+      <h2 class="label" id="projects-title" data-reveal>Projects</h2>
+      <ul class="projects">
+        {#each projects as project, index (project.name)}
+          <li data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+            <a class="project" href={project.href} target="_blank" rel="noreferrer">
+              <span class="project-name">{project.name}</span>
+              <span class="project-description">{project.description}</span>
+            </a>
+          </li>
+        {/each}
+      </ul>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <a class="wordmark" href="#home" aria-label="Back to top">fraa<span>™</span></a>
-    <div class="footer-links">
-      <a href="https://github.com/fraa2a" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://ds.taxphobia.top" target="_blank" rel="noreferrer">Discord</a>
-    </div>
+  <footer class="footer">
+    <span>fraa™</span>
+    <a href="mailto:{profile.email}">{profile.email}</a>
   </footer>
 </div>
 
