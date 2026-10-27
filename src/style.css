@@ -50,8 +50,16 @@ button:focus-visible {
 }
 
 .page {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+  flex-direction: column;
   width: min(100% - 48px, 1040px);
   margin-inline: auto;
+}
+
+.page > main {
+  flex: 1;
 }
 
 .label {
@@ -121,13 +129,7 @@ button:focus-visible {
 .ico-location { --icon: url('/icons/location-outline.svg'); }
 .ico-mail { --icon: url('/icons/mail-outline.svg'); }
 
-.ico-chat {
-  background: none;
-  -webkit-mask: none;
-  mask: none;
-  font-size: 15px;
-  line-height: 1;
-}
+.ico-discord { --icon: url('/icons/discord.svg'); }
 
 .lead h1 {
   margin: 8px 0 0;

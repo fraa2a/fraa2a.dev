@@ -15,8 +15,8 @@ export const profile = {
 export const tools = [
   { name: 'Rust', icon: 'rust', color: '#f74c00' },
   { name: 'Python', icon: 'python', color: '#4b8bbe' },
-  { name: 'Svelte', icon: 'svelte', color: '#ff3e00' },
   { name: 'TypeScript', icon: 'typescript', color: '#3a8ee6' },
+  { name: 'Java', icon: 'java', color: '#f89820' },
   { name: 'Git', icon: 'git', color: '#f05032' },
   { name: 'Arch Linux', icon: 'archlinux', color: '#1793d1' },
 ]

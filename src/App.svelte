@@ -73,7 +73,7 @@
           <li><span class="ico ico-code" aria-hidden="true"></span><a href={profile.github} target="_blank" rel="noreferrer">@{profile.handle}</a></li>
           <li><span class="ico ico-location" aria-hidden="true"></span>{profile.location}</li>
           <li><span class="ico ico-mail" aria-hidden="true"></span><a href="mailto:{profile.email}">{profile.email}</a></li>
-          <li><span class="ico ico-chat" aria-hidden="true">#</span><a href={profile.discord} target="_blank" rel="noreferrer">Discord</a></li>
+          <li><span class="ico ico-discord" aria-hidden="true"></span><a href={profile.discord} target="_blank" rel="noreferrer">Discord</a></li>
         </ul>
       </aside>
 
