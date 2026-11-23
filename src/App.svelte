@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte'
-  import { profile, tools, projects } from './lib/data.ts'
+  import { profile, tools, projects, sites } from './lib/data.ts'
+  import Contributions from './lib/Contributions.svelte'
 
   let overcharged = $state(false)
 
@@ -68,43 +69,40 @@
   <main>
     <section class="intro" aria-labelledby="name">
       <aside class="side" data-reveal>
-        <img class="avatar" src="/avatar.jpg" alt="Portrait of {profile.name}" width="240" height="240" />
+        <div class="who">
+          <img class="avatar" src="/avatar.jpg" alt="Portrait of {profile.name}" width="240" height="240" />
+          <p class="label role">{profile.role}</p>
+        </div>
         <ul class="info">
-          <li><span class="ico ico-code" aria-hidden="true"></span><a href={profile.github} target="_blank" rel="noreferrer">@{profile.handle}</a></li>
+          <li><span class="ico ico-github" aria-hidden="true"></span><a href={profile.github} target="_blank" rel="noreferrer">@{profile.handle}</a></li>
           <li><span class="ico ico-location" aria-hidden="true"></span>{profile.location}</li>
           <li><span class="ico ico-mail" aria-hidden="true"></span><a href="mailto:{profile.email}">{profile.email}</a></li>
-          <li><span class="ico ico-discord" aria-hidden="true"></span><a href={profile.discord} target="_blank" rel="noreferrer">Discord</a></li>
+          <li><span class="ico ico-discord" aria-hidden="true"></span><span><span class="sr-only">Discord: </span>@{profile.handle}</span></li>
         </ul>
       </aside>
 
       <div class="lead" data-reveal style="--reveal-delay: 80ms">
-        <p class="label">{profile.role}</p>
         <h1 id="name">{profile.name}</h1>
         <div class="bio">
           {#each profile.bio as paragraph}
             <p>{paragraph}</p>
           {/each}
         </div>
-        <img
-          class="graph"
-          src={profile.contributions}
-          alt="GitHub contribution graph for {profile.handle}"
-          width="663"
-          height="104"
-          loading="lazy"
-        />
+        <Contributions handle={profile.handle} fallback={profile.contributions} />
       </div>
     </section>
 
     <section class="block" aria-labelledby="tools-title">
       <h2 class="label" id="tools-title" data-reveal>Tools</h2>
-      <ul class="tools" data-reveal>
-        {#each tools as tool}
-          <li style={`--tool-color: ${tool.color}; --icon: url(/icons/tools/${tool.icon}.svg)`}>
-            <span class="tool-ico" aria-hidden="true"></span>{tool.name}
-          </li>
-        {/each}
-      </ul>
+      {#each tools as row}
+        <ul class="tools" data-reveal>
+          {#each row as tool}
+            <li style={`--tool-color: ${tool.color}; --icon: url(/icons/tools/${tool.icon}.svg)`}>
+              <span class="tool-ico" aria-hidden="true"></span>{tool.name}
+            </li>
+          {/each}
+        </ul>
+      {/each}
     </section>
 
     <section class="block" aria-labelledby="projects-title">
@@ -112,9 +110,30 @@
       <ul class="projects">
         {#each projects as project, index (project.name)}
           <li data-reveal style={`--reveal-delay: ${index * 70}ms`}>
-            <a class="project" href={project.href} target="_blank" rel="noreferrer">
-              <span class="project-name">{project.name}</span>
-              <span class="project-description">{project.description}</span>
+            {#if project.href}
+              <a class="project" href={project.href} target="_blank" rel="noreferrer">
+                <span class="project-name">{project.name}</span>
+                <span class="project-description">{project.description}</span>
+              </a>
+            {:else}
+              <div class="project">
+                <span class="project-name">{project.name}<span class="tag">private</span></span>
+                <span class="project-description">{project.description}</span>
+              </div>
+            {/if}
+          </li>
+        {/each}
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="web-title">
+      <h2 class="label" id="web-title" data-reveal>Web</h2>
+      <ul class="projects">
+        {#each sites as site, index (site.name)}
+          <li data-reveal style={`--reveal-delay: ${index * 70}ms`}>
+            <a class="project" href={site.href} target="_blank" rel="noreferrer">
+              <span class="project-name">{site.name}</span>
+              <span class="project-description">{site.description}<span class="domain">{new URL(site.href).hostname.replace(/^www\./, '')}</span></span>
             </a>
           </li>
         {/each}
@@ -124,7 +143,7 @@
 
   <footer class="footer">
     <span>fraa™</span>
-    <a href="mailto:{profile.email}">{profile.email}</a>
+    <a href={profile.github} target="_blank" rel="noreferrer">github.com/{profile.handle}</a>
   </footer>
 </div>
 
