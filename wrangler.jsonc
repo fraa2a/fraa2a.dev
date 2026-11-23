@@ -1,0 +1,10 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "fraa2a-dev",
+  "compatibility_date": "2026-11-23",
+  "assets": {
+    "directory": "./dist"
+  },
+  // required by `wrangler preview` for pull request preview builds
+  "previews": {}
+}
